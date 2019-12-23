@@ -79,17 +79,31 @@ function mostCarsByState (cars) {
         sama = ''
       } 
   } 
+  var dataPlatDanPersentaseFix = []
+  for ( i = 0; i < platTidakBerulang.length; i++) {
+    for ( j = 0; j < dataPlatDanPersentase.length; j++) {
+      if (platTidakBerulang[i] === dataPlatDanPersentase[j][0]) {
+        dataPlatDanPersentaseFix.push(dataPlatDanPersentase[j])
+      }
+    }
+  } 
   // cari hasil dimulai dari plat sesuai urutan input dan dimulai dari presentase terbesar 
   // (hasil sudah pasti diurutkan sesuai input dan dimulai dari presentase terbesar) 
   var hasil = []
     for ( i = 0; i < persentasePlat.length; i++) {
-      for (j = 0; j < dataPlatDanPersentase.length; j++) {
-        if (persentasePlat[i] === dataPlatDanPersentase[j][1] && platTidakBerulang[i] === dataPlatDanPersentase[j][0]) {
-          hasil.push(dataPlatDanPersentase[j][0],dataPlatDanPersentase[j][1])
+      for (j = 0; j < dataPlatDanPersentaseFix.length; j++) {
+        if (persentasePlat[i] === dataPlatDanPersentaseFix[j][1] ) {
+          hasil.push(dataPlatDanPersentaseFix[j][0],dataPlatDanPersentaseFix[j][1])
+          
         }
+       
+      } 
+      if (hasil.length === 8) {
+        return hasil
       }
-    }
-   return hasil
+       
+    } 
+   
 };
 
 console.log(mostCarsByState(['B', 'D', 'B', 'B', 'A', 'C', 'D']));
@@ -104,4 +118,4 @@ console.log(mostCarsByState(['B', 'D', 'B', 'B', 'A', 'C', 'D']));
   14.285714285714285 ]
 */
 
-console.log(mostCarsByState(['D', 'B','D','B','A','C']))
+console.log(mostCarsByState(['D','C','D','B','A','D','A']))
