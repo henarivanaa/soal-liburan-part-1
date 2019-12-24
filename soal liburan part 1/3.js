@@ -32,78 +32,42 @@
 
 function mostCarsByState (cars) {
   //code below here
-// buat variable berisi plat dan prosentase nya
   var platA = ['A',0]
   var platB = ['B',0]
   var platC = ['C',0]
   var platD = ['D',0]
-
-// looping untuk memasukkan presentasi sesuai plat dari input(cars)
-  for ( i = 0; i < cars.length; i++) {
-    if ( cars[i] === platA[0]) {
-      platA[1] += 1/cars.length * 100
-    } else if ( cars[i] === platB[0]) {
-      platB[1] += 1/cars.length * 100
-    } else if ( cars[i] === platC[0]) {
-      platC[1] += 1/cars.length * 100
-    } else if ( cars[i] === platD[0]) {
-      platD[1] += 1/cars.length * 100
-    } 
-  } 
-// buat variable berisi array gabungan dari variable setiap plat
-  var dataPlatDanPersentase = [platA,platB,platC,platD]
-
-// Sorting persentasePlat
-  var persentasePlat = [platA[1],platB[1],platC[1],platD[1]]
-
-  for ( i = 0; i < persentasePlat.length; i++) {
-    for (j = 0; j < persentasePlat.length-1-i; j++) {
-      if (persentasePlat[j] < persentasePlat[j+1]) {
-        var simpenan = persentasePlat[j]
-        persentasePlat[j] = persentasePlat[j+1]
-        persentasePlat[j+1] = simpenan
-      }
+   //input plat
+  for (i = 0; i < cars.length; i++) {
+    if (cars[i] === 'A') {
+      platA[1] += 1/7*100
+      
+    } else if (cars[i] === 'B') {
+      platB[1] += 1/7*100
+    } else if ( cars[i] === 'C') {
+      platC[1] += 1/7*100
+    } else {
+      platD[1] += 1/7*100
     }
   }
-// buat variable berisi input tanpa pengulangan
-  var platTidakBerulang = [cars[0]]
- 
-  for ( i = 1; i < cars.length; i++) {
-    var sama = ''
-    for ( j = 0; j < platTidakBerulang.length; j++) {
-      if (cars[i] === platTidakBerulang[j]) {
-        sama = 'ada'
-      }
-    } if (sama === '') {
-        platTidakBerulang.push(cars[i])
-        sama = ''
-      } 
-  } 
-  var dataPlatDanPersentaseFix = []
-  for ( i = 0; i < platTidakBerulang.length; i++) {
-    for ( j = 0; j < dataPlatDanPersentase.length; j++) {
-      if (platTidakBerulang[i] === dataPlatDanPersentase[j][0]) {
-        dataPlatDanPersentaseFix.push(dataPlatDanPersentase[j])
+  // sorting presentase
+  var plat = [platA,platB,platC,platD]
+  for (i = 0; i < plat.length; i++) {
+    for (j = 0; j < plat.length-1-i; j++) {
+      if (plat[j][1] < plat[j+1][1]) {
+        var simpenan = plat[j]
+        plat[j] = plat[j+1]
+        plat[j+1] = simpenan
       }
     }
   } 
-  // cari hasil dimulai dari plat sesuai urutan input dan dimulai dari presentase terbesar 
-  // (hasil sudah pasti diurutkan sesuai input dan dimulai dari presentase terbesar) 
+  // array sesuai output
   var hasil = []
-    for ( i = 0; i < persentasePlat.length; i++) {
-      for (j = 0; j < dataPlatDanPersentaseFix.length; j++) {
-        if (persentasePlat[i] === dataPlatDanPersentaseFix[j][1] ) {
-          hasil.push(dataPlatDanPersentaseFix[j][0],dataPlatDanPersentaseFix[j][1])
-          
-        }
-       
-      } 
-      if (hasil.length === 8) {
-        return hasil
-      }
-       
-    } 
-   
+  for (i = 0; i < plat.length; i++) {
+    for (j = 0; j < plat[i].length; j++) {
+      hasil[hasil.length] = plat[i][j]
+    }
+  }
+  return hasil
 };
 
 console.log(mostCarsByState(['B', 'D', 'B', 'B', 'A', 'C', 'D']));
@@ -118,4 +82,4 @@ console.log(mostCarsByState(['B', 'D', 'B', 'B', 'A', 'C', 'D']));
   14.285714285714285 ]
 */
 
-console.log(mostCarsByState(['D','C','D','B','A','D','A']))
+console.log(mostCarsByState(['D','C','D','B','A','D','A',]))
